@@ -100,9 +100,11 @@ class_name_key = encoder_manager.encoder_config.class_name_key
 # compute speaker embeddings
 speaker_mapping = {}
 for idx, fields in enumerate(tqdm(samples)):
+    print(fields)
     class_name = fields[class_name_key]
     audio_file = fields["audio_file"]
-    embedding_key = fields["audio_unique_name"]
+    #kde se vezme audio_unique_name? ve fields neni, hazelo error, dostatecna identifikace je nazev celeho souboru
+    embedding_key = audio_file#fields["audio_unique_name"]
     root_path = fields["root_path"]
 
     if args.old_file is not None and embedding_key in encoder_manager.clip_ids:
@@ -114,8 +116,9 @@ for idx, fields in enumerate(tqdm(samples)):
 
     # create speaker_mapping if target dataset is defined
     speaker_mapping[embedding_key] = {}
-    speaker_mapping[embedding_key]["name"] = class_name
+    speaker_mapping[embedding_key]["name"] = audio_file[23:30]#class_name # já bych dal spk_XXX, tj. audio_file[23:33]
     speaker_mapping[embedding_key]["embedding"] = embedd
+    # print(speaker_mapping)
 
 if speaker_mapping:
     # save speaker_mapping if target dataset is defined
