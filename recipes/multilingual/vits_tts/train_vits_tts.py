@@ -15,7 +15,7 @@ from TTS.utils.audio import AudioProcessor
 
 output_path = os.path.dirname(os.path.abspath(__file__))
 dataset_config = BaseDatasetConfig(
-    name="mailabs", meta_file_train="metadata.txt", language="en-us", path="/content/snemovna/"
+    name="mailabs", meta_file_train="metadata.txt", language="cs-cz", path="/content/snemovna/"
 )
 
 def snemovna_formatter(root_path, manifest_file, **kwargs): 
