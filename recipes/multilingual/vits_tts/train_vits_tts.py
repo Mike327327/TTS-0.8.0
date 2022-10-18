@@ -3,35 +3,56 @@ from glob import glob
 
 from trainer import Trainer, TrainerArgs
 
+from TTS.config.shared_configs import BaseAudioConfig
 from TTS.tts.configs.shared_configs import BaseDatasetConfig
 from TTS.tts.configs.vits_config import VitsConfig
 from TTS.tts.datasets import load_tts_samples
-from TTS.tts.models.vits import CharactersConfig, Vits, VitsArgs, VitsAudioConfig
+from TTS.tts.models.vits import CharactersConfig, Vits, VitsArgs
 from TTS.tts.utils.languages import LanguageManager
 from TTS.tts.utils.speakers import SpeakerManager
 from TTS.tts.utils.text.tokenizer import TTSTokenizer
 from TTS.utils.audio import AudioProcessor
 
 output_path = os.path.dirname(os.path.abspath(__file__))
+dataset_config = BaseDatasetConfig(
+    name="mailabs", meta_file_train="metadata.txt", language="en-us", path="/content/snemovna/"
+)
 
-mailabs_path = "/home/julian/workspace/mailabs/**"
-dataset_paths = glob(mailabs_path)
-dataset_config = [
-    BaseDatasetConfig(formatter="mailabs", meta_file_train=None, path=path, language=path.split("/")[-1])
-    for path in dataset_paths
-]
+def snemovna_formatter(root_path, manifest_file, **kwargs): 
+    """Assumes each line as ```<filename>|<transcription>|<transcription>```
+    """
+    txt_file = os.path.join(root_path, manifest_file)
+    items = []
+    speaker_name = ""
+    with open(txt_file, "r", encoding="utf-8") as ttf:
+        for line in ttf:
+            cols = line.split("|")
+            wav_file = os.path.join(root_path, "wavs", cols[0]) + ".wav"
+            text = cols[1]
+            speaker_name = cols[0][:7]
+            items.append({"text":text, "audio_file":wav_file, "speaker_name":speaker_name, "root_path": root_path})
+    return items
 
-audio_config = VitsAudioConfig(
+audio_config = BaseAudioConfig(
     sample_rate=16000,
     win_length=1024,
     hop_length=256,
     num_mels=80,
+    preemphasis=0.0,
+    ref_level_db=20,
+    log_func="np.log",
+    do_trim_silence=False,
+    trim_db=23.0,
     mel_fmin=0,
     mel_fmax=None,
+    spec_gain=1.0,
+    signal_norm=True,
+    do_amp_to_db_linear=False,
+    resample=False,
 )
 
 vitsArgs = VitsArgs(
-    use_language_embedding=True,
+    use_language_embedding=False,
     embedded_language_dim=4,
     use_speaker_embedding=True,
     use_sdp=False,
@@ -40,7 +61,7 @@ vitsArgs = VitsArgs(
 config = VitsConfig(
     model_args=vitsArgs,
     audio=audio_config,
-    run_name="vits_vctk",
+    run_name="vits_snemovna",
     use_speaker_embedding=True,
     batch_size=32,
     eval_batch_size=16,
@@ -52,13 +73,14 @@ config = VitsConfig(
     epochs=1000,
     text_cleaner="multilingual_cleaners",
     use_phonemes=False,
-    phoneme_language="en-us",
+    phoneme_language="cs-cz",
     phoneme_cache_path=os.path.join(output_path, "phoneme_cache"),
     compute_input_seq_cache=True,
     print_step=25,
     use_language_weighted_sampler=True,
     print_eval=False,
     mixed_precision=False,
+    # sort_by_audio_len=True,
     min_audio_len=32 * 256 * 4,
     max_audio_len=160000,
     output_path=output_path,
@@ -69,30 +91,19 @@ config = VitsConfig(
         eos="<EOS>",
         bos="<BOS>",
         blank="<BLNK>",
-        characters="!¡'(),-.:;¿?abcdefghijklmnopqrstuvwxyzµßàáâäåæçèéêëìíîïñòóôöùúûüąćęłńœśşźżƒабвгдежзийклмнопрстуфхцчшщъыьэюяёєіїґӧ «°±µ»$%&‘’‚“`”„",
+        characters="!¡'(),-.:;¿?abcdefghijklmnopqrstuvwxyzěščřňůťďžýµßàáâäåæçèéêëìíîïñòóôöùúûüąćęłńœśşźżƒабвгдежзийклмнопрстуфхцчшщъыьэюяёєіїґӧ «°±µ»$%&‘’‚“`”„",
         punctuations="!¡'(),-.:;¿? ",
         phonemes=None,
     ),
     test_sentences=[
         [
-            "It took me quite a long time to develop a voice, and now that I have it I'm not going to be silent.",
-            "mary_ann",
+            "Ahoj",
+            "spk_000",
             None,
-            "en_US",
-        ],
-        [
-            "Il m'a fallu beaucoup de temps pour d\u00e9velopper une voix, et maintenant que je l'ai, je ne vais pas me taire.",
-            "ezwa",
-            None,
-            "fr_FR",
-        ],
-        ["Ich finde, dieses Startup ist wirklich unglaublich.", "eva_k", None, "de_DE"],
-        ["Я думаю, что этот стартап действительно удивительный.", "oblomov", None, "ru_RU"],
+            "cs_CZ",
+        ]
     ],
 )
-
-# force the convertion of the custom characters to a config attribute
-config.from_dict(config.to_dict())
 
 # init audio processor
 ap = AudioProcessor(**config.audio.to_dict())
@@ -103,6 +114,7 @@ train_samples, eval_samples = load_tts_samples(
     eval_split=True,
     eval_split_max_size=config.eval_split_max_size,
     eval_split_size=config.eval_split_size,
+    formatter=snemovna_formatter,
 )
 
 # init speaker manager for multi-speaker training
@@ -111,16 +123,13 @@ speaker_manager = SpeakerManager()
 speaker_manager.set_ids_from_data(train_samples + eval_samples, parse_key="speaker_name")
 config.model_args.num_speakers = speaker_manager.num_speakers
 
-language_manager = LanguageManager(config=config)
-config.model_args.num_languages = language_manager.num_languages
-
 # INITIALIZE THE TOKENIZER
 # Tokenizer is used to convert text to sequences of token IDs.
 # config is updated with the default characters if not defined in the config.
 tokenizer, config = TTSTokenizer.init_from_config(config)
 
 # init model
-model = Vits(config, ap, tokenizer, speaker_manager, language_manager)
+model = Vits(config, ap, tokenizer, speaker_manager) #, language_manager)
 
 # init the trainer and 🚀
 trainer = Trainer(
