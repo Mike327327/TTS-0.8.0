@@ -11,6 +11,8 @@ from TTS.tts.datasets import load_tts_samples
 from TTS.tts.utils.managers import save_file
 from TTS.tts.utils.speakers import SpeakerManager
 
+import pickle as pkl
+
 parser = argparse.ArgumentParser(
     description="""Compute embedding vectors for each audio file in a dataset and store them keyed by `{dataset_name}#{file_path}` in a .pth file\n\n"""
     """
@@ -99,6 +101,8 @@ class_name_key = encoder_manager.encoder_config.class_name_key
 
 # compute speaker embeddings
 speaker_mapping = {}
+embeddings_d_vectors = []
+
 for idx, fields in enumerate(tqdm(samples)):
     print(fields)
     class_name = fields[class_name_key]
@@ -118,7 +122,9 @@ for idx, fields in enumerate(tqdm(samples)):
     speaker_mapping[embedding_key] = {}
     speaker_mapping[embedding_key]["name"] = audio_file[23:30]#class_name # já bych dal spk_XXX, tj. audio_file[23:33]
     speaker_mapping[embedding_key]["embedding"] = embedd
-    # print(speaker_mapping)
+    embeddings_d_vectors.append(embedd)
+with open('embeddings_d_vectors.pkl', 'wb') as f:
+    pkl.dump(embeddings_d_vectors, f)
 
 if speaker_mapping:
     # save speaker_mapping if target dataset is defined
