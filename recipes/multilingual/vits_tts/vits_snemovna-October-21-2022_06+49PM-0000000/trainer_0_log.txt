@@ -1,0 +1,17 @@
+ > Training Environment:
+ | > Current device: 0
+ | > Num. of GPUs: 1
+ | > Num. of CPUs: 2
+ | > Num. of Torch Threads: 1
+ | > Torch seed: 54321
+ | > Torch CUDNN: True
+ | > Torch CUDNN deterministic: False
+ | > Torch CUDNN benchmark: False
+
+ > Model has 88769469 parameters
+
+[4m[1m > EPOCH: 0/1000[0m
+ --> /content/TTS-0.8.0/recipes/multilingual/vits_tts/vits_snemovna-October-21-2022_06+49PM-0000000
+
+[1m > TRAINING (2022-10-21 18:49:50) [0m
+ ! Run is kept in /content/TTS-0.8.0/recipes/multilingual/vits_tts/vits_snemovna-October-21-2022_06+49PM-0000000
