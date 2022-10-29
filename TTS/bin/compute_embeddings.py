@@ -11,14 +11,11 @@ from TTS.tts.datasets import load_tts_samples
 from TTS.tts.utils.managers import save_file
 from TTS.tts.utils.speakers import SpeakerManager
 
-import pickle as pkl
-
 parser = argparse.ArgumentParser(
     description="""Compute embedding vectors for each audio file in a dataset and store them keyed by `{dataset_name}#{file_path}` in a .pth file\n\n"""
     """
     Example runs:
     python TTS/bin/compute_embeddings.py --model_path speaker_encoder_model.pth --config_path speaker_encoder_config.json  --config_dataset_path dataset_config.json
-
     python TTS/bin/compute_embeddings.py --model_path speaker_encoder_model.pth --config_path speaker_encoder_config.json  --fomatter vctk --dataset_path /path/to/vctk/dataset --dataset_name my_vctk --metafile /path/to/vctk/metafile.csv
     """,
     formatter_class=RawTextHelpFormatter,
@@ -101,14 +98,10 @@ class_name_key = encoder_manager.encoder_config.class_name_key
 
 # compute speaker embeddings
 speaker_mapping = {}
-embeddings_d_vectors = []
-
 for idx, fields in enumerate(tqdm(samples)):
-    print(fields)
     class_name = fields[class_name_key]
     audio_file = fields["audio_file"]
-    #kde se vezme audio_unique_name? ve fields neni, hazelo error, dostatecna identifikace je nazev celeho souboru
-    embedding_key = audio_file#fields["audio_unique_name"]
+    embedding_key = audio_file #fields["audio_unique_name"]
     root_path = fields["root_path"]
 
     if args.old_file is not None and embedding_key in encoder_manager.clip_ids:
@@ -120,11 +113,8 @@ for idx, fields in enumerate(tqdm(samples)):
 
     # create speaker_mapping if target dataset is defined
     speaker_mapping[embedding_key] = {}
-    speaker_mapping[embedding_key]["name"] = audio_file[23:30]#class_name # já bych dal spk_XXX, tj. audio_file[23:33]
+    speaker_mapping[embedding_key]["name"] = audio_file[16:23] #class_name - tady by mi dávalo větší smysl mít spk_XXX (tj. audio_file[start:end])
     speaker_mapping[embedding_key]["embedding"] = embedd
-    embeddings_d_vectors.append(embedd)
-with open('embeddings_d_vectors.pkl', 'wb') as f:
-    pkl.dump(embeddings_d_vectors, f)
 
 if speaker_mapping:
     # save speaker_mapping if target dataset is defined
