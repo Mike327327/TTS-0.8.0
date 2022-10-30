@@ -101,7 +101,7 @@ speaker_mapping = {}
 for idx, fields in enumerate(tqdm(samples)):
     class_name = fields[class_name_key]
     audio_file = fields["audio_file"]
-    embedding_key = audio_file #fields["audio_unique_name"]
+    embedding_key = fields["audio_unique_name"]
     root_path = fields["root_path"]
 
     if args.old_file is not None and embedding_key in encoder_manager.clip_ids:
