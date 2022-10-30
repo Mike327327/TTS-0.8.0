@@ -15,7 +15,7 @@ from TTS.utils.audio import AudioProcessor
 
 output_path = os.path.dirname(os.path.abspath(__file__))
 dataset_config = BaseDatasetConfig(
-    name="mailabs", meta_file_train="metadata.txt", language="cs-cz", path="/content/snemovna/"
+    name="mailabs", meta_file_train="metadata.txt", language="cs-cz", path="./snemovna/"
 )
 
 def snemovna_formatter(root_path, manifest_file, **kwargs): 
@@ -56,7 +56,7 @@ vitsArgs = VitsArgs(
     use_speaker_embedding=False,
     use_sdp=False,
     use_d_vector_file=True,
-    d_vector_file="/content/drive/MyDrive/YourTTS/embeddings_d_vectors.pkl",
+    d_vector_file="./drive/MyDrive/YourTTS/d_vector_file_1000_speakers_relative_paths.json",
     d_vector_dim= 512,
 )
 
@@ -65,11 +65,11 @@ config = VitsConfig(
     audio=audio_config,
     run_name="vits_snemovna",
     use_speaker_embedding=False,
-    batch_size=16,
-    eval_batch_size=8,
+    batch_size=8,
+    eval_batch_size=4,
     batch_group_size=0,
-    num_loader_workers=4,
-    num_eval_loader_workers=4,
+    num_loader_workers=2,
+    num_eval_loader_workers=2,
     run_eval=True,
     test_delay_epochs=-1,
     epochs=1000,
@@ -106,9 +106,8 @@ config = VitsConfig(
         ]
     ],
     add_blank=False,
-
     use_d_vector_file=True,
-    d_vector_file="/content/drive/MyDrive/YourTTS/embeddings_d_vectors.pkl,",
+    d_vector_file="./drive/MyDrive/YourTTS/d_vector_file_1000_speakers_relative_paths.json",
     d_vector_dim=512,
 )
 
