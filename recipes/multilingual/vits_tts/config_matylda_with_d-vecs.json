@@ -119,7 +119,7 @@
     "precompute_num_workers": 0,
     "start_by_longest": false,
     "datasets": [{
-        "formatter": "",
+        "formatter": "mailabs",
         "name": "mailabs",
         "path": "../../../../datasets/",
         "meta_file_train": "metadata.txt",
