@@ -131,25 +131,25 @@
     "test_sentences": [
         [
             "N\u00e1\u0161 t\u00e1ta m\u00e1 neolemovanou \u010depici. Olemujeme-li mu ji nebo neolemujeme-li mu ji?",
-            "spk_052",
+            null,
             null,
             "cs_CZ"
         ],
         [
             "Ahoj, tady skv\u011bl\u00fd T T S model, kter\u00fd um\u00ed \u0159\u00edkat \u0158.",
-            "spk_018",
+            null,
             null,
             "cs_CZ"
         ],
         [
             "\u0160el p\u0161tros s p\u0161trosic\u00ed a p\u0161tros\u00e1\u010daty na p\u0161tros\u00ed v\u00fdlet.",
-            "spk_014",
+            null,
             null,
             "cs_CZ"
         ],
         [
             "\u0158e\u0159icho \u0159ekni \u0158.",
-            "spk_090",
+            null,
             null,
             "cs_CZ"
         ]
