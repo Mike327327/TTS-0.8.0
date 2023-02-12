@@ -110,10 +110,10 @@ for idx, fields in enumerate(tqdm(samples)):
     else:
         # extract the embedding
         embedd = encoder_manager.compute_embedding_from_clip(audio_file)
-
+    print(fields["text"].strip())
     # create speaker_mapping if target dataset is defined
     speaker_mapping[embedding_key] = {}
-    speaker_mapping[embedding_key]["name"] = audio_file[16:23] #class_name - tady by mi dávalo větší smysl mít spk_XXX (tj. audio_file[start:end])
+    speaker_mapping[embedding_key]["name"] = fields["text"].strip()
     speaker_mapping[embedding_key]["embedding"] = embedd
 
 if speaker_mapping:
