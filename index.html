@@ -7,17 +7,21 @@
   </head>
   <body>
       <h1>TTS Personalization</h1>
-        This page shows results of the models trained for a Czech TTS system.<br>
-        First, results of base models are presented along with examples.<br>
-        This is followed by example of non-fine-tuned and fine-tuned samples (male and female speakers).<br>
+      <p class="par">
+        This page shows results of the models trained for a Czech TTS system.
+        First, results of base models are presented along with examples.
+        This is followed by example of non-fine-tuned and fine-tuned samples (male and female speakers).
         Each section is briefly introduced and the results are commented.
-
+      </p>
+        
       <h2>Base models</h2>
-
       <h3>1M and 200k</h3>
-      The 1M model is capable of generating shorter samples conditioned on d-vectors in a decent quality (samples B1 and B2).
-      However, longer inputs caused issues and speech was unintelligible (sample 3). This issues was solved by segmenting the input text based on commas (sample 4).
-      The 200k model performed worse than the 1M model. Segmenting the input text sometimes did not help and speech was not intelligible, as can heard in sample 5.
+      <p class="par">
+        The 1M model is capable of generating shorter samples conditioned on d-vectors in a decent quality (samples B1 and B2).
+        However, longer inputs caused issues and speech was unintelligible (sample B3). This issues was solved by segmenting the input text based on commas (sample B4).
+        The 200k model performed worse than the 1M model. Segmenting the input text sometimes did not help and speech was not intelligible, as can be heard in sample B5.
+      </p>
+      <div class="audio-samples">
         <table style="margin: 0 auto;">
         <thead>
             <tr>
@@ -32,7 +36,6 @@
             </tr>
         </tbody>
         </table>
-        <br>
        
         <table style="margin: 0 auto;">
         <thead>
@@ -40,7 +43,6 @@
             <th>1M (not segmented) (B3)</th>
             <th>1M (segmented) (B4)</th>
             <th>200k (segmented) (B5)</th>
-
             </tr>
         </thead>
         <tbody>
@@ -51,99 +53,13 @@
             </tr>
         </tbody>
         </table>
-        
-
+      </div>
       
       <h2>Male personalization</h2>
-      The generated examples below are compared to the ground truth (first column). Samples were generated using the 1M and 1M(P) models.
-      <div class="audio-samples">
-        <table style="margin: 0 auto;">
-            <thead>
-              <tr>
-                <th>Original</th>
-                <th>Unseen</th>
-                <th>Fine-tuned</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_139_14.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_139_14_unseen.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_139_14_seen.wav" type="audio/wav"></audio></td>
-              </tr>
-            </tbody>
-          </table>
-
-        <table style="margin: 0 auto;">
-            <thead>
-              <tr>
-                <!-- <th>PAVEL_INTERVIEW-4_129_24 (B3)</th>
-                <th>PAVEL_INTERVIEW-4_129_24_unseen (B4)</th>
-                <th>PAVEL_INTERVIEW-4_129_24_seen (B5)</th> -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_129_24.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_129_24_unseen.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_129_24_seen.wav" type="audio/wav"></audio></td>
-              </tr>
-            </tbody>
-          </table>
-
-        <table style="margin: 0 auto;">
-            <thead>
-              <tr>
-                <!-- <th>PAVEL_INTERVIEW-4_129_4 (B3)</th>
-                <th>PAVEL_INTERVIEW-4_129_4_unseen (B4)</th>
-                <th>PAVEL_INTERVIEW-4_129_4_seen (B5)</th> -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_129_4.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_129_4_unseen.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_129_4_seen.wav" type="audio/wav"></audio></td>
-              </tr>
-            </tbody>
-          </table>
-
-        <table style="margin: 0 auto;">
-            <thead>
-              <tr>
-                <!-- <th>PAVEL_INTERVIEW-4_124_16 (B3)</th>
-                <th>PAVEL_INTERVIEW-4_124_16_unseen (B4)</th>
-                <th>PAVEL_INTERVIEW-4_124_16_seen (B5)</th> -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_124_16.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_124_16_unseen.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_124_16_seen.wav" type="audio/wav"></audio></td>
-              </tr>
-            </tbody>
-          </table>
-
-        <table style="margin: 0 auto;">
-            <thead>
-              <tr>
-                <!-- <th>PAVEL_INTERVIEW-4_124_10 (B3)</th>
-                <th>PAVEL_INTERVIEW-4_124_10_unseen (B4)</th>
-                <th>PAVEL_INTERVIEW-4_124_10_seen (B5)</th> -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_124_10.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_124_10_unseen.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_124_10_seen.wav" type="audio/wav"></audio></td>
-              </tr>
-            </tbody>
-          </table>
-
-      <h2>Female personalization</h2>
-      The generated examples below are compared to the ground truth (first column). Samples were generated using the 200k(F) and 200k(N+F) models.
+      <p class="par">
+        The generated examples below are compared to the ground truth (first column). 
+        The following two samples on each line were generated using the 1M and 1M(P) models.
+      </p>
       <div class="audio-samples">
       <table style="margin: 0 auto;">
         <thead>
@@ -155,80 +71,116 @@
         </thead>
         <tbody>
           <tr>
-            <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-3_135_0.wav" type="audio/wav"></audio></td>
-            <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-3_135_0_unseen.wav" type="audio/wav"></audio></td>
-            <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-3_135_0_seen.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_139_14.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_139_14_unseen.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_139_14_seen.wav" type="audio/wav"></audio></td>
           </tr>
         </tbody>
       </table>
 
-        <table style="margin: 0 auto;">
-            <thead>
-              <tr>
-                <!-- <th>Original</th>
-                <th>Unseen</th>
-                <th>Fine-tuned</th> -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_101_11.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_101_11_unseen.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_101_11_seen.wav" type="audio/wav"></audio></td>
-              </tr>
-            </tbody>
-          </table>
+      <table style="margin: 0 auto;">
+        <tbody>
+          <tr>
+            <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_129_24.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_129_24_unseen.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_129_24_seen.wav" type="audio/wav"></audio></td>
+          </tr>
+        </tbody>
+      </table>
 
-        <table style="margin: 0 auto;">
-            <thead>
-              <tr>
-                <!-- <th>Original</th>
-                <th>Unseen</th>
-                <th>Fine-tuned</th> -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_164_9.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_164_9_unseen.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_164_9_seen.wav" type="audio/wav"></audio></td>
-              </tr>
-            </tbody>
-          </table>
+      <table style="margin: 0 auto;">
+        <tbody>
+          <tr>
+            <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_129_4.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_129_4_unseen.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_129_4_seen.wav" type="audio/wav"></audio></td>
+          </tr>
+        </tbody>
+      </table>
 
-        <table style="margin: 0 auto;">
-            <thead>
-              <tr>
-                <!-- <th>Original</th>
-                <th>Unseen</th>
-                <th>Fine-tuned</th> -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_171_0.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_171_0_unseen.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_171_0_seen.wav" type="audio/wav"></audio></td>
-              </tr>
-            </tbody>
-          </table>
+      <table style="margin: 0 auto;">
+        <tbody>
+          <tr>
+            <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_124_16.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_124_16_unseen.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_124_16_seen.wav" type="audio/wav"></audio></td>
+          </tr>
+        </tbody>
+      </table>
 
-        <table style="margin: 0 auto;">
-            <thead>
-              <tr>
-                <!-- <th>Original</th>
-                <th>Unseen</th>
-                <th>Fine-tuned</th> -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_197_0.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_197_0_unseen.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_197_0_seen.wav" type="audio/wav"></audio></td>
-              </tr>
-            </tbody>
-          </table>
+      <table style="margin: 0 auto;">
+        <tbody>
+          <tr>
+            <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_124_10.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_124_10_unseen.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/pavel/PAVEL_INTERVIEW-4_124_10_seen.wav" type="audio/wav"></audio></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Female personalization</h2>
+    <p class="par">
+    The generated examples below are compared to the ground truth (first column). 
+    The following two samples on each line were generated using the 200k(F) and 200k(N+F) models.
+    </p>
+    <div class="audio-samples">
+      <table style="margin: 0 auto;">
+      <thead>
+        <tr>
+          <th>Original</th>
+          <th>Unseen</th>
+          <th>Fine-tuned</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-3_135_0.wav" type="audio/wav"></audio></td>
+          <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-3_135_0_unseen.wav" type="audio/wav"></audio></td>
+          <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-3_135_0_seen.wav" type="audio/wav"></audio></td>
+        </tr>
+      </tbody>
+      </table>
+
+      <table style="margin: 0 auto;">
+        <tbody>
+          <tr>
+            <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_101_11.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_101_11_unseen.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_101_11_seen.wav" type="audio/wav"></audio></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table style="margin: 0 auto;">
+        <tbody>
+          <tr>
+            <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_164_9.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_164_9_unseen.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_164_9_seen.wav" type="audio/wav"></audio></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table style="margin: 0 auto;">
+        <tbody>
+          <tr>
+            <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_171_0.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_171_0_unseen.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_171_0_seen.wav" type="audio/wav"></audio></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table style="margin: 0 auto;">
+        <tbody>
+          <tr>
+            <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_197_0.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_197_0_unseen.wav" type="audio/wav"></audio></td>
+            <td><audio controls><source src="audio/nerudova/DANUSE_INTERVIEW-4_197_0_seen.wav" type="audio/wav"></audio></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </body>
 </html>
