@@ -54,10 +54,29 @@ h3 {
   font-size: 20px;
 }
 
-@media screen and (max-width: 600px) {
-  .audio-samples table {
+.audio-samples table {
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 900px) {
+  .audio-samples table thead {
+    display: none;
+  }
+  
+  .audio-samples table tbody tr {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  
+  .audio-samples table tbody td {
+    padding: 10px 0;
+  }
+  
+  .audio-samples table tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: center;
   }
 }
