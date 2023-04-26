@@ -11,23 +11,105 @@
     </header>
     <div class="content">
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac augue et ex tincidunt consequat. Nulla vitae libero mauris. Suspendisse eu felis euismod, sagittis justo et, dictum velit. In pulvinar ante eget dapibus vestibulum. Sed nec rhoncus elit, quis feugiat libero. Fusce luctus enim quis orci facilisis hendrerit. Sed sed felis eget odio mollis hendrerit. Sed ac ornare odio.
+        This page shows results of the models trained for a Czech TTS system.<br>
+        First, results of base models are presented along with examples.<br>
+        This is followed by example of non-fine-tuned and fine-tuned samples (male and female speakers).<br>
+        Each section is briefly introduced and the results are commented.
       </p>
-      <h2>1M Model</h2>
+
+      <h2>Base models</h2>
+
+      <h3>1M and 200k</h3>
+      <p>The 1M model is capable of generating shorter samples conditioned on d-vectors in a decent quality (samples 1 and 2 - original and generated).
+      However, longer inputs caused issues and speech was unintelligible (sample 3). This issues was solved by segmenting the input text based on commas (sample 4).
+      The 200k model performed worse than the 1M model. Segmenting the input text sometimes did not help and speech was not intelligible, as can heard in sample 5. 
+    </p>
       <div class="audio-samples">
         <audio controls>
-          <source src="audio/sample1.wav" type="audio/wav">
+            <source src="audio/1m_orig.wav" type="audio/wav">
         </audio>
         <audio controls>
-          <source src="audio/sample2.wav" type="audio/wav">
+          <source src="audio/1m_infer.wav" type="audio/wav">
         </audio>
         <audio controls>
-          <source src="audio/sample3.wav" type="audio/wav">
+          <source src="audio/1m_unscaled.wav" type="audio/wav">
         </audio>
         <audio controls>
-          <source src="audio/sample4.wav" type="audio/wav">
+          <source src="audio/1m_scaled.wav" type="audio/wav">
+        </audio>
+        <audio controls>
+            <source src="audio/200k_unscaled.wav" type="audio/wav">
+          </audio>
+      </div>
+
+      <h2>Male personalization</h2>
+      <h3>original - unseen - fine-tuned</h3>
+      <div class="audio-samples">
+        <audio controls>
+          <source src="audio/pavel/PAVEL_INTERVIEW-4_139_14.wav" type="audio/wav">
+        </audio>
+        <audio controls>
+          <source src="audio/pavel/PAVEL_INTERVIEW-4_139_14_unseen.wav" type="audio/wav">
+        </audio>
+        <audio controls>
+          <source src="audio/pavel/PAVEL_INTERVIEW-4_139_14_seen.wav" type="audio/wav">
         </audio>
       </div>
+<br>
+      <div class="audio-samples">
+        <audio controls>
+          <source src="audio/pavel/PAVEL_INTERVIEW-4_129_24.wav" type="audio/wav">
+        </audio>
+        <audio controls>
+          <source src="audio/pavel/PAVEL_INTERVIEW-4_129_24_unseen.wav" type="audio/wav">
+        </audio>
+        <audio controls>
+          <source src="audio/pavel/PAVEL_INTERVIEW-4_129_24_seen.wav" type="audio/wav">
+        </audio>
+      </div>
+      <br>
+      <div class="audio-samples">
+        <audio controls>
+          <source src="audio/pavel/PAVEL_INTERVIEW-4_129_4.wav" type="audio/wav">
+        </audio>
+        <audio controls>
+          <source src="audio/pavel/PAVEL_INTERVIEW-4_129_4_unseen.wav" type="audio/wav">
+        </audio>
+        <audio controls>
+          <source src="audio/pavel/PAVEL_INTERVIEW-4_129_4_seen.wav" type="audio/wav">
+        </audio>
+      </div>
+
+      <br>
+      <div class="audio-samples">
+        <audio controls>
+          <source src="audio/pavel/PAVEL_INTERVIEW-4_124_16.wav" type="audio/wav">
+        </audio>
+        <audio controls>
+          <source src="audio/pavel/PAVEL_INTERVIEW-4_124_16_unseen.wav" type="audio/wav">
+        </audio>
+        <audio controls>
+          <source src="audio/pavel/PAVEL_INTERVIEW-4_124_16_seen.wav" type="audio/wav">
+        </audio>
+      </div>
+
+      <br>
+      <div class="audio-samples">
+        <audio controls>
+          <source src="audio/pavel/PAVEL_INTERVIEW-4_124_10.wav" type="audio/wav">
+        </audio>
+        <audio controls>
+          <source src="audio/pavel/PAVEL_INTERVIEW-4_124_10_unseen.wav" type="audio/wav">
+        </audio>
+        <audio controls>
+          <source src="audio/pavel/PAVEL_INTERVIEW-4_124_10_seen.wav" type="audio/wav">
+        </audio>
+      </div>
+
+      <h2>Female personalization</h2>
+      <h3>original - unseen - unseen fine-tuned - fine-tuned</h3>
+
+
     </div>
   </body>
 </html>
