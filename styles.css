@@ -67,7 +67,7 @@ footer {
 }
 
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 980px) {
   .audio-samples table thead {
     display: none;
   }
